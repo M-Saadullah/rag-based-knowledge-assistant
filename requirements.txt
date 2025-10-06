@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+python-multipart
+langgraph
+langchain
+langchain_community
+langchain-nomic
+langchain-groq
+chromadb
+python-dotenv
+pydantic
+tiktoken
+pypdf2
+pdfplumber

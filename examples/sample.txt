@@ -1,0 +1,18 @@
+Title: Introduction to Artificial Intelligence
+
+Artificial Intelligence (AI) is a branch of computer science that aims to create intelligent machines that can perform tasks that typically require human intelligence. These tasks include:
+
+1. Visual perception
+2. Speech recognition
+3. Decision-making
+4. Language translation
+
+Machine Learning, a subset of AI, focuses on developing systems that can learn from and make predictions based on data. Deep Learning, in turn, is a subset of Machine Learning that uses neural networks with multiple layers.
+
+Key Applications of AI:
+- Healthcare: Disease diagnosis and treatment planning
+- Finance: Fraud detection and risk assessment
+- Transportation: Autonomous vehicles and traffic management
+- Education: Personalized learning and automated grading
+
+The future of AI holds great promise, but also raises important ethical considerations regarding privacy, bias, and the impact on employment.

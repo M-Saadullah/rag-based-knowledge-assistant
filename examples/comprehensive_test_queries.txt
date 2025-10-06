@@ -1,0 +1,164 @@
+# Comprehensive Test Queries for Knowledge Assistant
+
+## 1. BASIC RETRIEVAL TESTS (Should find relevant content)
+
+### AI & Machine Learning Questions:
+- "What are the main types of machine learning?"
+- "How does deep learning differ from traditional machine learning?"
+- "What are the applications of AI in healthcare?"
+- "Explain supervised vs unsupervised learning"
+- "What are transformers in deep learning?"
+
+### Web Development Questions:
+- "What are the popular JavaScript frameworks?"
+- "Compare React, Vue.js, and Angular frameworks"
+- "What backend technologies are mentioned for Python?"
+- "What is the difference between SQL and NoSQL databases?"
+- "What are vector databases used for?"
+
+### Cloud Computing Questions:
+- "What services does AWS provide?"
+- "Compare the major cloud providers"
+- "What is serverless computing?"
+- "What are microservices?"
+- "Explain Infrastructure as Code"
+
+### DevOps Questions:
+- "What are CI/CD pipelines?"
+- "What tools are used for monitoring and observability?"
+- "What is containerization?"
+- "How does Docker work in deployment?"
+
+### Security Questions:
+- "What are authentication best practices?"
+- "Explain OAuth 2.0 and JWT"
+- "What is encryption at rest vs in transit?"
+- "What security headers should be implemented?"
+
+## 2. CROSS-DOCUMENT RETRIEVAL TESTS (Content from multiple sources)
+
+### Combined AI Questions:
+- "How is AI used in both healthcare and finance?"
+- "What are the ethical considerations of AI mentioned?"
+- "Compare machine learning approaches across different domains"
+
+## 3. FALLBACK BEHAVIOR TESTS (Should trigger "no information found")
+
+### Unrelated Topics:
+- "What is the recipe for chocolate cake?"
+- "How do I fix a broken car engine?"
+- "What is the weather like today?"
+- "Tell me about ancient Roman history"
+- "How to train a dog?"
+
+### Specific Technical Topics Not Covered:
+- "What is quantum entanglement?"
+- "How does blockchain consensus work?"
+- "What are the latest updates in Python 3.12?"
+- "Explain the details of TCP/IP protocol"
+
+## 4. EDGE CASE TESTS
+
+### Empty/Minimal Queries:
+- "AI"
+- "What?"
+- "Tell me"
+- "Explain"
+- ""
+
+### Very Long Queries:
+- "I want to understand everything about artificial intelligence including machine learning, deep learning, neural networks, computer vision, natural language processing, and how they all work together in modern applications across different industries like healthcare, finance, and transportation, can you provide a comprehensive overview?"
+
+### Complex Multi-Part Questions:
+- "What are the differences between React and Vue.js, and which one should I choose for a healthcare AI application?"
+- "How do I implement OAuth 2.0 authentication in a microservices architecture deployed on AWS?"
+
+## 5. LANGGRAPH WORKFLOW TESTS
+
+### Parallel Retrieval Testing:
+- "Database systems" (should trigger both vector and keyword search)
+- "Security authentication" (test dual retrieval methods)
+- "Cloud computing AWS" (verify parallel processing)
+
+### Conditional Branching Tests:
+- First upload documents, then ask questions to test context retrieval
+- Ask about completely unrelated topics to test fallback
+- Test with partial matches to see conditional logic
+
+## 6. SYSTEM STRESS TESTS
+
+### Rapid Fire Questions:
+- Ask multiple questions quickly to test async processing
+- Upload multiple documents and query immediately
+- Test concurrent requests
+
+### Document Processing Tests:
+- Upload the markdown file: comprehensive_guide.md
+- Upload the sample.txt file
+- Upload your PDF file
+- Test querying after each upload
+
+## 7. EXPECTED BEHAVIORS TO VERIFY
+
+### ✅ Success Cases:
+- Questions about uploaded content should return relevant answers
+- System should cite or reference the source documents
+- Parallel retrieval should provide comprehensive results
+- Processing should be fast and responsive
+
+### ⚠️ Fallback Cases:
+- Unknown topics should return: "I apologize, but I couldn't find enough relevant information..."
+- Empty context should trigger fallback node
+- System should gracefully handle errors
+
+### 🔍 LangGraph Features to Observe:
+- Conditional branching working (context check)
+- Parallel execution (vector + keyword search)
+- State management (question, context, answer flow)
+- Error handling and graceful degradation
+
+## 8. TESTING WORKFLOW
+
+### Step 1: Start the Server
+```bash
+uvicorn src.main:app --reload
+```
+
+### Step 2: Upload Test Documents
+```bash
+# Upload markdown file
+curl -X POST "http://localhost:8000/upload" -F "file=@examples/comprehensive_guide.md"
+
+# Upload text file
+curl -X POST "http://localhost:8000/upload" -F "file=@examples/sample.txt"
+
+# Upload PDF file (if available)
+curl -X POST "http://localhost:8000/upload" -F "file=@your_pdf_file.pdf"
+```
+
+### Step 3: Test Query Categories
+- Run through each category of questions above
+- Observe response times and quality
+- Check for proper fallback behavior
+
+### Step 4: Verify LangGraph Workflow
+- Monitor console logs for workflow execution
+- Check that both vector and keyword searches are running
+- Verify conditional branching logic
+
+## 9. DEBUGGING TIPS
+
+### Check Vector Database:
+```python
+python test.py  # Check if documents are stored
+```
+
+### Monitor API Responses:
+- Use FastAPI docs at http://localhost:8000/docs
+- Check response times and error messages
+- Verify JSON response format
+
+### LangGraph Debugging:
+- Look for workflow execution logs
+- Check state transitions in console
+- Verify parallel execution timing
